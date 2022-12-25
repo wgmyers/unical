@@ -13,6 +13,8 @@
 require 'optparse'
 require 'date'
 
+require_relative 'lib/cal'
+
 VERSION = '0.0.1'
 options = {
   action: :print,
@@ -91,7 +93,7 @@ end
 options[:year] = Date.today.strftime("%Y") unless options[:year]
 options[:month] = Date.today.strftime("%m") unless options[:month]
 
-puts "Cal output goes here"
-pp options
+cal = Calendar.new(options)
+cal.print
 
 exit 0
