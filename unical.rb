@@ -94,6 +94,6 @@ options[:year] = Date.today.strftime("%Y") unless options[:year]
 options[:month] = Date.today.strftime("%m") unless options[:month]
 
 cal = Calendar.new(options)
-cal.print
+cal.print_month
 
 exit 0
