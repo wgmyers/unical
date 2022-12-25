@@ -36,12 +36,33 @@ class Calendar
     options
   end
 
-  # print
+  # is_leap_year
+  # Gregorian calendar, obvs
+  def is_leap_year(year)
+    if year % 4 == 0
+      if year % 100 == 0
+        if year % 400 == 0
+          return true
+        else
+          return false
+        end
+      end
+      return true
+    end
+    return false
+  end
+
+  # print_month
   # Assumes we have a good month and year
   # Prints out cal formatted version of that month
   def print_month
-    # FIXME: The WHOLE POINT is not to assume a Julian calendar
+    # FIXME: The WHOLE POINT is not to assume a Gregorian calendar
     months = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31]
+
+    # Handle leap years
+    if is_leap_year(@options[:year])
+      months[1] = 29
+    end
 
     # Get a reference date for the first of given month
     ref_d = Date.new(@options[:year], @options[:month], 1)
