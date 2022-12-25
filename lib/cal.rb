@@ -51,13 +51,14 @@ class Calendar
 
     puts "#{pretty_month} #{@options[:year]}".center(20)
 
-    puts "Su Mo Tu We Th Fr Sa"
+    puts "Su Mo Tu We Th Fr Sa" # FIXME
     day_of_first.times { print "   " }
     (1..months[@options[:month] - 1]).each do |d|
       print "#{d.to_s.rjust(2, " ")} "
       puts "" if ((d + day_of_first)%7 == 0)
     end
     puts ""
+    puts "" unless ((months[@options[:month] - 1] + day_of_first)%7 == 0) # Add extra newline if needed
 
   end
 
