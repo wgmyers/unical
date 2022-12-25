@@ -45,6 +45,7 @@ class Calendar
 
     # Get a reference date for the first of given month
     ref_d = Date.new(@options[:year], @options[:month], 1)
+    today = Date.today
 
     pretty_month = ref_d.strftime("%B") # Gets long name of month
     day_of_first = ref_d.strftime("%w").to_i # Gets numeric dow 0-6, 0=Sunday
@@ -54,7 +55,14 @@ class Calendar
     puts "Su Mo Tu We Th Fr Sa" # FIXME
     day_of_first.times { print "   " }
     (1..months[@options[:month] - 1]).each do |d|
-      print "#{d.to_s.rjust(2, " ")} "
+      if (@options[:highlight] == true &&
+          today.year == ref_d.year &&
+          today.month == ref_d.month &&
+          today.day == d)
+        print "\033[7m#{d.to_s.rjust(2, " ")}\033[m "
+      else
+        print "#{d.to_s.rjust(2, " ")} "
+      end
       puts "" if ((d + day_of_first)%7 == 0)
     end
     puts ""
