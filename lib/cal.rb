@@ -36,6 +36,37 @@ class Calendar
     options
   end
 
+  # print_output
+  # Looks at options to see what we should print, then prints it
+  # FIXME - does not yet handle -A and -B options
+  def print_output
+    if @options[:fullyear]
+      print_year
+    elsif @options[:threemonth]
+      print_three_months
+    else
+      print_month
+    end
+  end
+
+  # print_month
+  # Calculate and print a single month
+  def print_month
+    output = calc_month(@options[:year], @options[:month])
+    output.each do |line|
+      puts line
+    end
+    puts ""
+  end
+
+  #############
+  # GREGORIAN #
+  #############
+  #
+  # Everything below here assumes a Gregorian calendar, and needs to be moved
+  # into a gregorian.rb file, so we can handle multiple different calendars
+  # in the future.
+
   # is_leap_year
   # Gregorian calendar, obvs
   def is_leap_year(year)
@@ -52,43 +83,46 @@ class Calendar
     return false
   end
 
-  # print_month
-  # Assumes we have a good month and year
-  # Prints out cal formatted version of that month
-  def print_month
-    # FIXME: The WHOLE POINT is not to assume a Gregorian calendar
+  # calc_month
+  # Takes a month and year (Gregorian)
+  # Returns array containing strings of cal formatted version of that month
+  def calc_month(year, month)
+    output = []
+
     months = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31]
 
     # Handle leap years
-    if is_leap_year(@options[:year])
+    if is_leap_year(year)
       months[1] = 29
     end
 
     # Get a reference date for the first of given month
-    ref_d = Date.new(@options[:year], @options[:month], 1)
+    ref_d = Date.new(year, month, 1)
     today = Date.today
 
     pretty_month = ref_d.strftime("%B") # Gets long name of month
     day_of_first = ref_d.strftime("%w").to_i # Gets numeric dow 0-6, 0=Sunday
 
-    puts "#{pretty_month} #{@options[:year]}".center(20)
+    output.push("#{pretty_month} #{year}".center(20))
+    output.push("Su Mo Tu We Th Fr Sa") # FIXME internationalisation!
 
-    puts "Su Mo Tu We Th Fr Sa" # FIXME
-    day_of_first.times { print "   " }
-    (1..months[@options[:month] - 1]).each do |d|
+    line = ""
+    day_of_first.times { line += "   " }
+    (1..months[month - 1]).each do |d|
       if (@options[:highlight] == true &&
           today.year == ref_d.year &&
           today.month == ref_d.month &&
           today.day == d)
-        print "\033[7m#{d.to_s.rjust(2, " ")}\033[m "
+        line += "\033[7m#{d.to_s.rjust(2, " ")}\033[m "
       else
-        print "#{d.to_s.rjust(2, " ")} "
+        line += "#{d.to_s.rjust(2, " ")} "
       end
-      puts "" if ((d + day_of_first)%7 == 0)
+      if ((d + day_of_first)%7 == 0)
+        output.push(line)
+        line = ""
+      end
     end
-    puts ""
-    puts "" unless ((months[@options[:month] - 1] + day_of_first)%7 == 0) # Add extra newline if needed
-
+    output
   end
 
 end

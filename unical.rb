@@ -21,6 +21,7 @@ options = {
   month: nil,
   year: nil,
   fullyear: false,
+  threemonth: false,
   highlight: true,
   calendar: 'Julian'
 }
@@ -28,6 +29,8 @@ options = {
 month_help = 'Specify a month to display'
 year_help = 'Specify a year to display'
 highlight_help = 'Do not highlight current day'
+one_month_help = 'Display one month as default'
+three_month_help = 'Display three months as default'
 
 op = OptionParser.new
 op.banner =  'An improved version of cal/ncal.'
@@ -45,6 +48,14 @@ op.on('-y', '--set-year=YEAR', year_help) do |year|
   options[:year] = year
 end
 op.on('-h', '--no-highlight', highlight_help) { options[:highlight] = false }
+op.on('-1', '--one-month', one_month_help) {
+  options[:fullyear] = false
+  options[:threemonth] = false
+}
+op.on('-3', '--three-month', three_month_help) {
+  options[:fullyear] = false
+  options[:threemonth] = true
+}
 
 op.separator ''
 op.separator 'Common options:'
@@ -94,6 +105,6 @@ options[:year] = Date.today.strftime("%Y") unless options[:year]
 options[:month] = Date.today.strftime("%m") unless options[:month]
 
 cal = Calendar.new(options)
-cal.print_month
+cal.print_output
 
 exit 0
