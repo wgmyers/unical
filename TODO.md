@@ -28,6 +28,7 @@ separate from display details.
 * -B X - display X preceding months to whatever else specified
 * -j - display a "Julian" calendar (not actually Julian calendar) with DoY instead of DoM
 * -N - behave like ncal
+* Any kind of handling of Julian / Gregorian calendar switch
 * Any of the ncal only options
 * Deep dive to ensure multiple options behave exactly like original cal does
 
