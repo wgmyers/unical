@@ -35,11 +35,10 @@ three_month_help = 'Display three months as default'
 op = OptionParser.new
 op.banner =  'An improved version of cal/ncal.'
 op.separator ''
-op.separator 'Usage: unical.rb [OPTION/S]'
+op.separator 'Usage: unical.rb [month] [year] [OPTION/S]'
 op.separator ''
 
-op.separator ''
-op.separator 'Supported legacy cal commands:'
+op.separator 'Supported legacy cal options:'
 op.on('-m', '--set-month=MONTH', month_help) do |mon|
   options[:month] = mon
 end
@@ -58,7 +57,7 @@ op.on('-3', '--three-month', three_month_help) {
 }
 
 op.separator ''
-op.separator 'Common options:'
+op.separator 'Standard options:'
 op.on('-H', '--help')    { options[:action] = :help    }
 op.on('-V', '--version') { options[:action] = :version }
 
