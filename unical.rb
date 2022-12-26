@@ -2,6 +2,9 @@
 
 # unical.rb
 
+# unical syntax:
+# unical [month] [year] [-m month] [-y year] [-h] [-3] [-1] [-d YYYY-MM] [-H] [-v]
+
 # cal syntax:
 # cal [month] [year] [-m month] [-y year] [-h] [-3] [-1] [-A num] [-B num]
 #     [-d YYYY-MM] [-j] [-N]
