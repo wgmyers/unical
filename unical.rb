@@ -31,6 +31,7 @@ year_help = 'Specify a year to display'
 highlight_help = 'Do not highlight current day'
 one_month_help = 'Display one month as default'
 three_month_help = 'Display three months as default'
+current_month_help = 'Operate as if current month is YYYY-MM'
 
 op = OptionParser.new
 op.banner =  'An improved version of cal/ncal.'
@@ -55,6 +56,15 @@ op.on('-3', '--three-month', three_month_help) {
   options[:fullyear] = false
   options[:threemonth] = true
 }
+op.on('-d', '--current-month=YYYY-MM', current_month_help) do |input|
+  if input !~ /^\d{4}-\d{2}$/
+    puts "Error: -d option must be YYYY-MM format"
+    exit 1
+  end
+  year, month = input.split("-")
+  options[:year] = year
+  options[:month] = month
+end
 
 op.separator ''
 op.separator 'Standard options:'
