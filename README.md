@@ -33,7 +33,7 @@ A bit. I mean, I am Jewish, so, you know, I do know what a lunisolar calendar is
 
 ## Are you sure?
 
-Well, sort of. Mostly. I've read about it a bit.
+Well, sort of. Mostly. I mean, I've read about it a bit.
 
 ## Uh-oh
 
@@ -64,9 +64,9 @@ Oh shit
 
 Alright then, what about the Islamic calendar. Surely...
 
-## It doesn't have a universally agreed-upon notion that fixed calculation methods are ok.
+## It doesn't have a universally agreed-upon notion that fixed calculation methods are ok at all.
 
-It.. what? Fine. The Chinese one then.
+It.. what? Fine. The Chinese one.
 
 ## There's two ways of doing it, one lunisolar, one solar
 
@@ -74,7 +74,7 @@ What?
 
 ## That's what Wikipedia says. It knows no more than you do, and if there are fixed methods, doesn't mention them.
 
-Alright then, the Hindu calendar
+Alright, the Hindu calendar, surely...
 
 ## Oh sure, which tradition will you implement first?
 
@@ -82,8 +82,8 @@ Which... what? How many are there?
 
 ## There's quite a few. By which I mean loads. All slightly different.
 
-Ok. Probably I have no business trying any of these. But the Jewish one, surely,
-I can do that.
+Ok. Probably I have no business trying any of these anyway. But the Jewish one,
+surely, I can do that.
 
 ## Sure. Read the thing about the Four Gates again.
 
@@ -91,7 +91,15 @@ I did.
 
 ## Do you understand it?
 
-No.
+No. Except the bit where you can't ever have Rosh Hashanah fall on a Wednesday.
+
+## Or a Friday, or Sunday.
+
+Right, right.
+
+## Which means you have to change the length of the preceding year.
+
+Yeah.
 
 ## Huh.
 
