@@ -49,6 +49,23 @@ class Calendar
     end
   end
 
+  # print_three_months
+  # Calculate and print given month plus previous and following months
+  def print_three_months
+    prev_m = get_prev_month(@options[:year], @options[:month])
+    next_m = get_next_month(@options[:year], @options[:month])
+
+    prev_month = calc_month(prev_m[0], prev_m[1])
+    next_month = calc_month(next_m[0], next_m[1])
+    this_month = calc_month(@options[:year], @options[:month])
+
+    this_month.each_with_index do |line, index|
+      puts "#{prev_month[index].ljust(21)}  #{line.ljust(21)}  #{next_month[index].ljust(21)}"
+    end
+    puts ""
+
+  end
+
   # print_month
   # Calculate and print a single month
   def print_month
@@ -66,6 +83,25 @@ class Calendar
   # Everything below here assumes a Gregorian calendar, and needs to be moved
   # into a gregorian.rb file, so we can handle multiple different calendars
   # in the future.
+
+  def get_prev_month(year, month)
+    new_month = month - 1
+    new_year = year
+    if new_month == 0
+      new_year -= 1
+      new_month = 12
+    end
+    [new_year, new_month]
+  end
+  def get_next_month(year, month)
+    new_month = month + 1
+    new_year = year
+    if new_month == 13
+      new_year += 1
+      new_month = 1
+    end
+    [new_year, new_month]
+  end
 
   # is_leap_year
   # Gregorian calendar, obvs
@@ -122,6 +158,7 @@ class Calendar
         line = ""
       end
     end
+    output.push(line) if line != ""
     output
   end
 
