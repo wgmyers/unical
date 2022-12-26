@@ -33,3 +33,9 @@ separate from display details.
 * Deep dive to ensure multiple options behave exactly like original cal does
 
 2. - Add eg Hebrew calendar, Islamic calendar, French Revolutionary calendar etc.
+
+Hebrew date library: https://github.com/dorner/hebrew_date
+
+Islamic date library: https://github.com/ecleel/hijri
+
+French Revolutionary date library: https://github.com/jhbadger/FrenchRevCal-ruby
