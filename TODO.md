@@ -39,3 +39,9 @@ Hebrew date library: https://github.com/dorner/hebrew_date
 Islamic date library: https://github.com/ecleel/hijri
 
 French Revolutionary date library: https://github.com/jhbadger/FrenchRevCal-ruby
+
+Korean: https://github.com/sunsidew/ruby_lunardate
+
+Chinese (partial): https://github.com/mycolorway/lunar_blessing
+
+Persian / Indian (JavaScript): https://github.com/shahabyazdi/date-object
