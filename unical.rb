@@ -23,7 +23,7 @@ options = {
   fullyear: false,
   threemonth: false,
   highlight: true,
-  calendar: 'Julian'
+  calendar: 'Gregorian'
 }
 
 month_help = 'Specify a month to display'
