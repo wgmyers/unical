@@ -49,6 +49,18 @@ class Calendar
     end
   end
 
+  # print_year
+  # Print a full year
+  def print_year
+    puts @options[:year].to_s.center(61)
+    # FIXME: this will fail on years that have more than 12 months
+    (2..11).step(3) do |m|
+      @options[:month] = m
+      print_three_months
+      puts "" if m < 11 # copy finicky cal formatting exactly
+    end
+  end
+
   # print_three_months
   # Calculate and print given month plus previous and following months
   def print_three_months
@@ -59,10 +71,22 @@ class Calendar
     next_month = calc_month(next_m[0], next_m[1])
     this_month = calc_month(@options[:year], @options[:month])
 
-    this_month.each_with_index do |line, index|
-      puts "#{prev_month[index].ljust(21)}  #{line.ljust(21)}  #{next_month[index].ljust(21)}"
+    # Some months extend over more weeks than others, so we need to add blank
+    # lines in the months with fewer weeks to ensure we get them all
+    max_lines = [prev_month.length, next_month.length, this_month.length].max
+    [prev_month, next_month, this_month].each do |month|
+      while month.length < max_lines
+        month.push("")
+      end
     end
-    puts ""
+
+    this_month.each_with_index do |line, index|
+      puts "#{prev_month[index].ljust(21)} #{line.ljust(21)} #{next_month[index].ljust(21)}"
+    end
+    # We want an extra blank line if we're only doing three months
+    # OR if it's a group of three months where no month extends into a 6th week
+    # 7 is the magic number as two lines are for title and DOW
+    puts "" if @options[:threemonth] || max_lines == 7
 
   end
 
@@ -139,7 +163,14 @@ class Calendar
     pretty_month = ref_d.strftime("%B") # Gets long name of month
     day_of_first = ref_d.strftime("%w").to_i # Gets numeric dow 0-6, 0=Sunday
 
-    output.push("#{pretty_month} #{year}".center(20))
+    # Month title omits year if full year being printed
+    if @options[:fullyear]
+      output.push("#{pretty_month}".center(20))
+    else
+      output.push("#{pretty_month} #{year}".center(20))
+    end
+
+    # Days of week
     output.push("Su Mo Tu We Th Fr Sa") # FIXME internationalisation!
 
     line = ""
