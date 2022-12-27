@@ -27,7 +27,8 @@ options = {
   fullyear: false,
   threemonth: false,
   highlight: true,
-  calendar: 'Gregorian'
+  calendar: 'Gregorian',
+  usetoday: false
 }
 
 month_help = 'Specify a month to display'
@@ -41,7 +42,7 @@ use_calendar_help = 'Use the given calendrical system'
 op = OptionParser.new
 op.banner =  'An improved version of cal/ncal.'
 op.separator ''
-op.separator 'Usage: unical.rb [month] [year] [OPTION/S]'
+op.separator 'Usage: unical [month] [year] [OPTION/S]'
 op.separator ''
 
 op.separator 'Supported legacy cal options:'
@@ -71,6 +72,7 @@ op.on('-d', '--current-month=YYYY-MM', current_month_help) do |input|
   options[:month] = month
 end
 
+op.separator ''
 op.separator 'New options for other calendrical systems'
 op.on('-U', '--use-calendar=CALENDAR', use_calendar_help) do |calendar|
   options[:calendar] = calendar
@@ -118,6 +120,14 @@ if ARGV.length > 2
   puts op.to_s
   exit 1
 end
+
+# Set usetoday flag if no year or month given
+# We need this because if we are using a non-default calendar, that module needs
+# to figure out its own version of the current month and year, not this one,
+# which will be Gregorian.
+# Otherwise, we can assume any input has been given in that calendar system and
+# can carry on as normal.
+options[:usetoday] = true if !options[:year] && !options[:month]
 
 # Get current month and year if needed
 options[:year] = Date.today.strftime('%Y') unless options[:year]
