@@ -51,8 +51,9 @@ def compare_output(flags)
     PTY.spawn(cal_cmd) do |r_f, _w_f, _pid|
       r_f.each { |line| cal_output_lines.push(line) }
     end
-  rescue Errno::EIO => e
-    puts "#{e.class}: #{e.message}"
+  rescue Errno::EIO
+    # Do nothing, this is what happens when output ends
+    nil
   end
   cal_output = strip_trailing(cal_output_lines.join(''))
   unical_output = strip_trailing(`#{unical_cmd}`)
