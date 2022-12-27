@@ -34,6 +34,20 @@ separate from display details.
 
 2. - Add eg Hebrew calendar, Islamic calendar, French Revolutionary calendar etc.
 
+### Hebrew
+
+#### DONE
+
+* Basic Hebrew calendar added - MIGHT WELL BE BUGGY NEED TO TEST EXTENSIVELY!
+
+#### TODO
+
+* Add support for displaying year starting in Tishri not Nisan
+* Add support for highlighting festivals
+* Add support for other fun stuff in the hebrew_date gem
+
+# Useful Libraries
+
 Hebrew date library: https://github.com/dorner/hebrew_date
 
 Islamic date library: https://github.com/ecleel/hijri
