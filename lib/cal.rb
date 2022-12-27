@@ -22,13 +22,13 @@ class Calendar
     raise BadMonthError unless options[:month] =~ /^\d+$/
 
     options[:month] = options[:month].to_i
-    # FIXME - month out of bounds
+    # FIXME: month out of bounds
 
     # Fix year
     raise BadYearError unless options[:year] =~ /^\d+$/
 
     options[:year] = options[:year].to_i
-    # FIXME - year out of bounds
+    # FIXME: year out of bounds
 
     # FIXME: fix other stuff?
 
@@ -127,7 +127,7 @@ class Calendar
 
   # is_leap_year
   # Gregorian calendar, obvs
-  def is_leap_year(year)
+  def leap_year?(year)
     if (year % 4).zero?
       if (year % 100).zero?
         return true if (year % 400).zero?
@@ -148,7 +148,7 @@ class Calendar
     months = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31]
 
     # Handle leap years
-    months[1] = 29 if is_leap_year(year)
+    months[1] = 29 if leap_year?(year)
 
     # Get a reference date for the first of given month
     ref_d = Date.new(year, month, 1)
@@ -165,19 +165,19 @@ class Calendar
     end
 
     # Days of week
-    output.push('Su Mo Tu We Th Fr Sa') # FIXME internationalisation!
+    output.push('Su Mo Tu We Th Fr Sa') # FIXME: internationalisation!
 
     line = ''
     day_of_first.times { line += '   ' }
     (1..months[month - 1]).each do |d|
-      if @options[:highlight] == true &&
-         today.year == ref_d.year &&
-         today.month == ref_d.month &&
-         today.day == d
-        line += "\033[7m#{d.to_s.rjust(2, ' ')}\033[m "
-      else
-        line += "#{d.to_s.rjust(2, ' ')} "
-      end
+      line += if @options[:highlight] == true &&
+                 today.year == ref_d.year &&
+                 today.month == ref_d.month &&
+                 today.day == d
+                "\033[7m#{d.to_s.rjust(2, ' ')}\033[m "
+              else
+                "#{d.to_s.rjust(2, ' ')} "
+              end
       if ((d + day_of_first) % 7).zero?
         output.push(line)
         line = ''

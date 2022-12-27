@@ -52,14 +52,14 @@ op.on('-y', '--set-year=YEAR', year_help) do |year|
   options[:year] = year
 end
 op.on('-h', '--no-highlight', highlight_help) { options[:highlight] = false }
-op.on('-1', '--one-month', one_month_help) {
+op.on('-1', '--one-month', one_month_help) do
   options[:fullyear] = false
   options[:threemonth] = false
-}
-op.on('-3', '--three-month', three_month_help) {
+end
+op.on('-3', '--three-month', three_month_help) do
   options[:fullyear] = false
   options[:threemonth] = true
-}
+end
 op.on('-d', '--current-month=YYYY-MM', current_month_help) do |input|
   if input !~ /^\d{4}-\d{2}$/
     puts 'Error: -d option must be YYYY-MM format'

@@ -1,0 +1,26 @@
+inherit_from: .rubocop_todo.yml
+
+# Offense count: 2
+# Configuration parameters: IgnoredMethods, CountRepeatedAttributes.
+Metrics/AbcSize:
+  Max: 40
+
+# Offense count: 1
+# Configuration parameters: CountComments, CountAsOne.
+Metrics/ClassLength:
+  Max: 130
+
+# Offense count: 1
+# Configuration parameters: IgnoredMethods.
+Metrics/CyclomaticComplexity:
+  Max: 10
+
+# Offense count: 4
+# Configuration parameters: CountComments, CountAsOne, ExcludedMethods, IgnoredMethods.
+Metrics/MethodLength:
+  Max: 33
+
+# Offense count: 1
+# Configuration parameters: IgnoredMethods.
+Metrics/PerceivedComplexity:
+  Max: 12
