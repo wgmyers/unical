@@ -8,6 +8,7 @@ class Hebrew < Calendar
 
   # print_year
   # Print a full year
+  # We need to override the default to handle leap years with 13 months
   def print_year
     puts "#{@options[:year] - 1}/#{@options[:year]}".center(61)
     (2..11).step(3) do |m|
@@ -67,7 +68,7 @@ class Hebrew < Calendar
       end
     end
 
-    # FIXME: add days of week
+    # Add days of week
     output.push('Su Mo Tu We Th Fr Sh') # FIXME: internationalisation!
 
     line = ''
