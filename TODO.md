@@ -34,6 +34,13 @@ separate from display details.
 
 2. - Add eg Hebrew calendar, Islamic calendar, French Revolutionary calendar etc.
 
+### General
+
+* Hook to add warning before undebugged / verified output
+* Hook + cmdline switch (-e?) to add extra info where available
+* Standard header in lib files to provide aliases and description
+* Cmdline switch to list known calendars
+
 ### Hebrew
 
 #### DONE
@@ -45,6 +52,11 @@ separate from display details.
 * Add support for displaying year starting in Tishri not Nisan
 * Add support for highlighting festivals
 * Add support for other fun stuff in the hebrew_date gem
+
+#### Issues
+
+* Using -d option for months before Tishri gives month from previous year
+* Using -m option gives 'invalid date'
 
 # Useful Libraries
 
