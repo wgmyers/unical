@@ -9,7 +9,7 @@ class Hebrew < Calendar
   # print_year
   # Print a full year
   def print_year
-    puts @options[:year].to_s.center(61)
+    puts "#{@options[:year] - 1}/#{@options[:year]}".center(61)
     (2..11).step(3) do |m|
       @options[:month] = m
       print_three_months
@@ -45,10 +45,10 @@ class Hebrew < Calendar
     today = HebrewDate.new(Date.today)
 
     # * calculate the proper lengths of Cheshvan and Kislev for the current year
-    if today.last_day_of_hebrew_month(8) == 30
+    if ref_d.last_day_of_hebrew_month(8) == 30
       months[7] = 30
     end
-    if today.last_day_of_hebrew_month(9) == 29
+    if ref_d.last_day_of_hebrew_month(9) == 29
       months[8] = 29
     end
 
@@ -61,6 +61,9 @@ class Hebrew < Calendar
     else
       output.push("#{pretty_month} #{year}".center(20))
     end
+
+    # FIXME: add days of week
+    output.push('Su Mo Tu We Th Fr Sh') # FIXME: internationalisation!
 
     line = ''
     day_of_first.times { line += '   ' }
