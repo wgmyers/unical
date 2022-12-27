@@ -3,7 +3,7 @@
 # Offense count: 2
 # Configuration parameters: IgnoredMethods, CountRepeatedAttributes.
 Metrics/AbcSize:
-  Max: 40
+  Max: 60
 
 # Offense count: 1
 # Configuration parameters: CountComments, CountAsOne.
@@ -13,14 +13,14 @@ Metrics/ClassLength:
 # Offense count: 1
 # Configuration parameters: IgnoredMethods.
 Metrics/CyclomaticComplexity:
-  Max: 10
+  Max: 15
 
 # Offense count: 4
 # Configuration parameters: CountComments, CountAsOne, ExcludedMethods, IgnoredMethods.
 Metrics/MethodLength:
-  Max: 33
+  Max: 45
 
 # Offense count: 1
 # Configuration parameters: IgnoredMethods.
 Metrics/PerceivedComplexity:
-  Max: 12
+  Max: 20

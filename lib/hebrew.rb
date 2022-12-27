@@ -2,10 +2,9 @@
 
 # hebrew.rb
 
-# Handle cal-like output for the Hebrew calendar
-
 require 'hebrew_date'
 
+# Handle cal-like output for the Hebrew calendar
 class Hebrew < Calendar
   # print_year
   # Print a full year
@@ -17,10 +16,11 @@ class Hebrew < Calendar
       print_three_months
       puts ''
     end
-    if HebrewDate.hebrew_leap_year?(@options[:year])
-      @options[:month] = 13
-      print_month
-    end
+    # Print a 13th month if we have one
+    return unless HebrewDate.hebrew_leap_year?(@options[:year])
+
+    @options[:month] = 13
+    print_month
   end
 
   def calc_month(year, month)
