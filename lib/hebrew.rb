@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # hebrew.rb
 
 # Handle cal-like output for the Hebrew calendar
@@ -5,7 +7,6 @@
 require 'hebrew_date'
 
 class Hebrew < Calendar
-
   # print_year
   # Print a full year
   # We need to override the default to handle leap years with 13 months
@@ -16,7 +17,7 @@ class Hebrew < Calendar
       print_three_months
       puts ''
     end
-    if HebrewDate::hebrew_leap_year?(@options[:year])
+    if HebrewDate.hebrew_leap_year?(@options[:year])
       @options[:month] = 13
       print_month
     end
@@ -36,7 +37,7 @@ class Hebrew < Calendar
     end
 
     # Add the extra month if we are in a leap year
-    if HebrewDate::hebrew_leap_year?(year)
+    if HebrewDate.hebrew_leap_year?(year)
       months[11] += 1
       months.push(29)
     end
@@ -46,12 +47,8 @@ class Hebrew < Calendar
     today = HebrewDate.new(Date.today)
 
     # * calculate the proper lengths of Cheshvan and Kislev for the current year
-    if ref_d.last_day_of_hebrew_month(8) == 30
-      months[7] = 30
-    end
-    if ref_d.last_day_of_hebrew_month(9) == 29
-      months[8] = 29
-    end
+    months[7] = 30 if ref_d.last_day_of_hebrew_month(8) == 30
+    months[8] = 29 if ref_d.last_day_of_hebrew_month(9) == 29
 
     pretty_month = ref_d.strftime('*B') # Gets long name of month
     day_of_first = ref_d.strftime('%w').to_i # Gets numeric dow 0-6, 0=Sunday
@@ -59,13 +56,11 @@ class Hebrew < Calendar
     # Month title omits year if full year being printed
     if @options[:fullyear]
       output.push(pretty_month.to_s.center(20))
-    else
+    elsif month < 7
       # Year changes in Tishri, not Nisan
-      if month < 7
-        output.push("#{pretty_month} #{year - 1}".center(20))
-      else
-        output.push("#{pretty_month} #{year}".center(20))
-      end
+      output.push("#{pretty_month} #{year - 1}".center(20))
+    else
+      output.push("#{pretty_month} #{year}".center(20))
     end
 
     # Add days of week
@@ -89,6 +84,5 @@ class Hebrew < Calendar
     end
     output.push(line) if line != ''
     output
-
   end
 end

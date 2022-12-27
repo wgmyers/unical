@@ -138,7 +138,7 @@ if options[:calendar] == 'Gregorian'
 else
   # Check the asked-for calendar exists, exit if we haven't got it
   cal_name = options[:calendar].downcase
-  if !File.exists? ("./lib/#{cal_name}.rb")
+  unless File.exist?("./lib/#{cal_name}.rb")
     puts "Can't find plugin for the #{options[:calendar]} calendar"
     exit 1
   end
