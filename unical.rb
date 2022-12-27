@@ -19,7 +19,7 @@ require 'date'
 
 require_relative 'lib/cal'
 
-VERSION = '0.0.1'
+VERSION = '0.0.2'
 options = {
   action: :print,
   month: nil,
@@ -79,7 +79,7 @@ op.separator ''
 begin
   op.parse!(ARGV)
 rescue OptionParser::MissingArgument
-  puts 'Must specify argument if using -m, -y, -A, -B or -d'
+  puts 'Must specify argument if using -m, -y or -d'
   exit 1
 rescue OptionParser::InvalidOption
   puts 'Options invalid - try -H or --help'
