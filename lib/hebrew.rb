@@ -23,6 +23,8 @@ class Hebrew < Calendar
     print_month
   end
 
+  # calc_month
+  # This is the main method that all non-Gregorian calendars need to override.
   def calc_month(year, month)
     output = []
 
