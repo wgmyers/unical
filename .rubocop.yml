@@ -1,4 +1,4 @@
-inherit_from: .rubocop_todo.yml
+# .rubocop.yml
 
 # Offense count: 2
 # Configuration parameters: IgnoredMethods, CountRepeatedAttributes.
