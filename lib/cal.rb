@@ -84,7 +84,7 @@ class Calendar
     # We want an extra blank line if we're only doing three months
     # OR if it's a group of three months where no month extends into a 6th week
     # 7 is the magic number as two lines are for title and DOW
-    puts '' if @options[:threemonth] || max_lines == 7
+    puts ' ' if @options[:threemonth] || max_lines == 7
   end
 
   # print_month
@@ -94,7 +94,7 @@ class Calendar
     output.each do |line|
       puts line
     end
-    puts ''
+    puts ' ' if output.length < 8 # cal doesn't /always/ add a line
   end
 
   #############
@@ -174,7 +174,7 @@ class Calendar
                  today.year == ref_d.year &&
                  today.month == ref_d.month &&
                  today.day == d
-                "\033[7m#{d.to_s.rjust(2, ' ')}\033[m "
+                "\033[7m#{d.to_s.rjust(2, ' ')}\033[27m "
               else
                 "#{d.to_s.rjust(2, ' ')} "
               end

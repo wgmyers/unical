@@ -60,6 +60,7 @@ def compare_output(flags)
 end
 
 puts "Testing output of unical.rb against cal output:"
+puts "NB: the -h test fails because cal -h does not work as expected"
 
 TESTS.each do |test|
   print "* - #{test[1]} (#{test[0]}): "
