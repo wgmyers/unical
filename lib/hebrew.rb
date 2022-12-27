@@ -59,7 +59,12 @@ class Hebrew < Calendar
     if @options[:fullyear]
       output.push(pretty_month.to_s.center(20))
     else
-      output.push("#{pretty_month} #{year}".center(20))
+      # Year changes in Tishri, not Nisan
+      if month < 7
+        output.push("#{pretty_month} #{year - 1}".center(20))
+      else
+        output.push("#{pretty_month} #{year}".center(20))
+      end
     end
 
     # FIXME: add days of week
