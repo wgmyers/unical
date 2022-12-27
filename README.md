@@ -1,106 +1,99 @@
 # Unical
 
-An attempt at an improved version of cal, with support for arbitrary
-calendrical systems and dual calendar display.
+An attempt at an "improved" version of cal, with support for arbitrary
+calendrical systems and eventually things like dual calendar display.
 
-## Why
+## What Works And What Doesn't
 
-Good question
+Currently it's a cut-down version of cal, implementing everything except the
+`-A`, `-B` and `-j` options.
 
-## You say 'attempt', how's it going
+I've yet to address any of the ncal stuff, so there's no Easter, no partial list
+of switch from Julian to Gregorian, no handling of Julian dates of any sort,
+and none of the extra ncal formatting options.
 
-So far I have replicated most of cal (except the -A and -B options) - but, so
-far, none of ncal.
+There is a new option `-U`, which, given the name of a calendar, will attempt
+to use that for all calculations if it finds a file of the corresponding name
+under the `lib` directory.
 
-## What's wrong with ncal
+So far the only non-Gregorian calendar implemented is Hebrew, and it seems to
+mostly work, with some bugs remaining and many unanswered questions.
 
-Nothing, but that's not the interesting bit to me. I want to try and implement
-a cal that can handle the Jewish, Islamic, Hindu, Chinese, French Revolutionary
-etc calendars.
+## Installation
 
-ncal adds various alternate display options, can calculate the date of Easter,
-and knows on what day different countries switched from Julian to Gregorian.
+Really?
 
-All great stuff which I will add later, but not the main thing rn.
+Ok, so you'll need a recent Ruby and a version of make. Not yet tested anywhere
+but Linux so might not work for you as is.
 
-## Have you looked up the word 'hubris', I mean, recently?
+Grab the repo and run `make install` to install the (currently one) dependency.
 
-What are you trying to say?
+Run the `unical` shell script rather than `unical.rb` directly, unless you like
+typing `bundle exec` a lot.
 
-## Let me rephrase that. Have you actually looked up any of those other calendars.
+Please let me know how it goes if you try it out.
 
-A bit. I mean, I am Jewish, so, you know, I do know what a lunisolar calendar is. Thanks.
+## Usage
 
-## Are you sure?
+Run `unical -H` or `unical --help` if you like typing.
 
-Well, sort of. Mostly. I mean, I've read about it a bit.
+I don't fully understand why `cal -h` now outputs help rather than being
+the 'turn off highlighting' switch as claimed by the man page, but that's old
+Unix commands for you. Anyway, `unical -h` (for now) does the switch thing.
 
-## Uh-oh
+## Adding Support For New Calendars
 
-Are you saying there's a reason this hasn't already been done?
+Really really? Like really? I'd be delighted, obviously.
 
-## Well it certainly isn't trivial
+Anyway. Look at `lib/hebrew.rb` to see how it works.
 
-No, obviously. But surely some bits are easier than others.
+Basically, you drop a file in `lib` that inherits from `Calendar` in `lib/cal.rb`,
+overriding whatever methods you need to make it all work.
 
-## Why do you think ncal guy did the multiple location-bound change dates between the Gregorian and Julian calendars bit before anything else?
+Sometimes it might be ok just to override `calc_month`, but with Hebrew, I had
+to override `print_year` as well because sometimes the Hebrew calendar has 13
+months instead of 12. I'd imagine that any other lunisolar calendar will have to
+do the same.
 
-What?
+I'm planning to add a standard magic header for things like aliases and a
+description, but that's not in place yet.
 
-## I think you heard me
+I'm also thinking very hard about whether or not I should even try adding
+support for calendars I genuinely know nothing about beyond the Wikipedia page,
+when it turns out that the Jewish calendar (about which I do know a few things)
+turns out to be so tricky (and is definitely not right yet).
 
-You can't be serious.
+But I'd love to provide support for as many calendars as possible, over time,
+and make it easy for people to add them: that was basically the Whole Idea.
 
-## O God
+## What's Next
 
-Maybe I'll start with the French Revolutionary Calendar. How hard can that be?
-They were trying to simplify things, after all. Metric system and all that.
+See `TODO.md`
 
-## Ten day weeks. No clear set of rules for leap days. Divergent ideas about what was actually meant and not actually in use any more anyway.
+## Oh go on, do a date
 
-Oh shit
+Ok, 27th December, 2022 / 3rd Tevet 5783
 
-## Yeah
+## That's not what the output looks like though, is it
 
-Alright then, what about the Islamic calendar. Surely...
+No
 
-## It doesn't have a universally agreed-upon notion that fixed calculation methods are ok at all.
+## ...
 
-It.. what? Fine. The Chinese one.
+Fine.
 
-## There's two ways of doing it, one lunisolar, one solar
+```
+$ ./unical -U Hebrew
+     Tevet 5783     
+Su Mo Tu We Th Fr Sh
+ 1  2  3  4  5  6  7
+ 8  9 10 11 12 13 14
+15 16 17 18 19 20 21
+22 23 24 25 26 27 28
+29
 
-What?
+```
 
-## That's what Wikipedia says. It knows no more than you do, and if there are fixed methods, doesn't mention them.
+## You should do a screenshot
 
-Alright, the Hindu calendar, surely...
-
-## Oh sure, which tradition will you implement first?
-
-Which... what? How many are there?
-
-## There's quite a few. By which I mean loads. All slightly different.
-
-Ok. Probably I have no business trying any of these anyway. But the Jewish one,
-surely, I can do that.
-
-## Sure. Read the thing about the Four Gates again.
-
-I did.
-
-## Do you understand it?
-
-No. Except the bit where you can't ever have Rosh Hashanah fall on a Wednesday.
-
-## Or a Friday, or Sunday.
-
-Right, right.
-
-## Which means you have to change the length of the preceding year.
-
-Yeah.
-
-## Huh.
-
-Huh.
+Yes. Probably.
