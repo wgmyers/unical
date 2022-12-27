@@ -1,4 +1,5 @@
 #!/usr/bin/env ruby
+# frozen_string_literal: true
 
 # unical.rb
 
@@ -61,10 +62,10 @@ op.on('-3', '--three-month', three_month_help) {
 }
 op.on('-d', '--current-month=YYYY-MM', current_month_help) do |input|
   if input !~ /^\d{4}-\d{2}$/
-    puts "Error: -d option must be YYYY-MM format"
+    puts 'Error: -d option must be YYYY-MM format'
     exit 1
   end
-  year, month = input.split("-")
+  year, month = input.split('-')
   options[:year] = year
   options[:month] = month
 end
@@ -113,8 +114,8 @@ if ARGV.length > 2
 end
 
 # Get current month and year if needed
-options[:year] = Date.today.strftime("%Y") unless options[:year]
-options[:month] = Date.today.strftime("%m") unless options[:month]
+options[:year] = Date.today.strftime('%Y') unless options[:year]
+options[:month] = Date.today.strftime('%m') unless options[:month]
 
 cal = Calendar.new(options)
 cal.print_output
