@@ -1,4 +1,5 @@
 #!/usr/bin/env ruby
+# frozen_string_literal: true
 
 # test_output.rb
 
@@ -19,7 +20,7 @@ TESTS = [
   ['1984', 'Year specified without -y'],
   ['-y 1984', 'Year specified with -y'],
   ['-d 1984-12', 'Month specified with -d']
-]
+].freeze
 
 # strip_trailing
 # Strips trailing whitespace from each line of a multiline string
@@ -50,7 +51,8 @@ def compare_output(flags)
     PTY.spawn(cal_cmd) do |r_f, _w_f, _pid|
       r_f.each { |line| cal_output_lines.push(line) }
     end
-  rescue Errno::EIO
+  rescue Errno::EIO => e
+    puts "#{e.class}: #{e.message}"
   end
   cal_output = strip_trailing(cal_output_lines.join(''))
   unical_output = strip_trailing(`#{unical_cmd}`)
