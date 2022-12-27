@@ -6,6 +6,21 @@ require 'hebrew_date'
 
 class Hebrew < Calendar
 
+  # print_year
+  # Print a full year
+  def print_year
+    puts @options[:year].to_s.center(61)
+    (2..11).step(3) do |m|
+      @options[:month] = m
+      print_three_months
+      puts ''
+    end
+    if HebrewDate::hebrew_leap_year?(@options[:year])
+      @options[:month] = 13
+      print_month
+    end
+  end
+
   def calc_month(year, month)
     output = []
 
@@ -19,13 +34,23 @@ class Hebrew < Calendar
       month = hebrew_date.strftime('*m').to_i
     end
 
-    # FIXME: here we need to:
-    # * add the extra month if we are in a leap year
-    # * calculate the proper lengths of Cheshvan and Kislev for the current year
+    # Add the extra month if we are in a leap year
+    if HebrewDate::hebrew_leap_year?(year)
+      months[11] += 1
+      months.push(29)
+    end
 
     # Get a reference date for the first of given month
     ref_d = HebrewDate.new_from_hebrew(year, month, 1)
     today = HebrewDate.new(Date.today)
+
+    # * calculate the proper lengths of Cheshvan and Kislev for the current year
+    if today.last_day_of_hebrew_month(8) == 30
+      months[7] = 30
+    end
+    if today.last_day_of_hebrew_month(9) == 29
+      months[8] = 29
+    end
 
     pretty_month = ref_d.strftime('*B') # Gets long name of month
     day_of_first = ref_d.strftime('%w').to_i # Gets numeric dow 0-6, 0=Sunday
