@@ -36,6 +36,7 @@ highlight_help = 'Do not highlight current day'
 one_month_help = 'Display one month as default'
 three_month_help = 'Display three months as default'
 current_month_help = 'Operate as if current month is YYYY-MM'
+use_calendar_help = 'Use the given calendrical system'
 
 op = OptionParser.new
 op.banner =  'An improved version of cal/ncal.'
@@ -68,6 +69,11 @@ op.on('-d', '--current-month=YYYY-MM', current_month_help) do |input|
   year, month = input.split('-')
   options[:year] = year
   options[:month] = month
+end
+
+op.separator 'New options for other calendrical systems'
+op.on('-U', '--use-calendar=CALENDAR', use_calendar_help) do |calendar|
+  options[:calendar] = calendar
 end
 
 op.separator ''
@@ -117,7 +123,19 @@ end
 options[:year] = Date.today.strftime('%Y') unless options[:year]
 options[:month] = Date.today.strftime('%m') unless options[:month]
 
-cal = Calendar.new(options)
+if options[:calendar] == 'Gregorian'
+  cal = Calendar.new(options)
+else
+  # Check the asked-for calendar exists, exit if we haven't got it
+  cal_name = options[:calendar].downcase
+  if !File.exists? ("./lib/#{cal_name}.rb")
+    puts "Can't find plugin for the #{options[:calendar]} calendar"
+    exit 1
+  end
+  # Ok, so load and run
+  require_relative "lib/#{cal_name}"
+  cal = Object.const_get(options[:calendar]).new options
+end
 cal.print_output
 
 exit 0
