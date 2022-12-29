@@ -16,8 +16,9 @@ There is a new option `-U`, which, given the name of a calendar, will attempt
 to use that for all calculations if it finds a file of the corresponding name
 under the `lib` directory.
 
-So far the only non-Gregorian calendar implemented is Hebrew, and it seems to
-mostly work, with some bugs remaining and many unanswered questions.
+So far the only non-Gregorian calendars implemented are the Hebrew and French
+Revolutionary calendars. Both seem to mostly work, with some bugs remaining and
+many unanswered (and unexpected) questions.
 
 ## Installation
 
@@ -45,7 +46,7 @@ Unix commands for you. Anyway, `unical -h` (for now) does the switch thing.
 
 Really really? Like really? I'd be delighted, obviously.
 
-Anyway. Look at `lib/hebrew.rb` to see how it works.
+Anyway. Look at `lib/hebrew.rb` and/or `lib/french.rb` to see how it works.
 
 Basically, you drop a file in `lib` that inherits from `Calendar` in `lib/cal.rb`,
 overriding whatever methods you need to make it all work.
@@ -72,7 +73,7 @@ See `TODO.md`
 
 ## Oh go on, do a date
 
-Ok, 27th December, 2022 / 3rd Tevet 5783
+Ok, 29th December, 2022 / 5th Tevet 5783 / 9 Nivôse 231
 
 ## That's not what the output looks like though, is it
 
@@ -83,6 +84,15 @@ No
 Fine.
 
 ```
+$ ./unical
+   December 2022    
+Su Mo Tu We Th Fr Sa
+          1  2  3
+4  5  6  7  8  9 10
+11 12 13 14 15 16 17
+18 19 20 21 22 23 24
+25 26 27 28 29 30 31
+
 $ ./unical -U Hebrew
      Tevet 5783     
 Su Mo Tu We Th Fr Sh
@@ -92,8 +102,15 @@ Su Mo Tu We Th Fr Sh
 22 23 24 25 26 27 28
 29
 
+$ ./unical -U French
+          Nivôse 231          
+Pr Du Tr Qu Qu Se Se Oc No Dé
+1  2  3  4  5  6  7  8  9 10
+11 12 13 14 15 16 17 18 19 20
+21 22 23 24 25 26 27 28 29 30
+
 ```
 
-## You should do a screenshot
+## You should do screenshots
 
 Yes. Probably.
