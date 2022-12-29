@@ -27,7 +27,7 @@ Really?
 Ok, so you'll need a recent Ruby and a version of make. Not yet tested anywhere
 but Linux so might not work for you as is.
 
-Grab the repo and run `make install` to install the (currently one) dependency.
+Grab the repo and run `make install` to install the (currently two) dependencies.
 
 Run the `unical` shell script rather than `unical.rb` directly, unless you like
 typing `bundle exec` a lot.
