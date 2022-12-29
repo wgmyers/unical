@@ -36,6 +36,8 @@ separate from display details.
 
 ### General
 
+#### TODO
+
 * Hook to add warning before undebugged / verified output
 * Hook + cmdline switch (-e?) to add extra info where available
 * Standard header in lib files to provide aliases and description
@@ -58,6 +60,22 @@ separate from display details.
 * Using -d option for months before Tishri gives month from previous year
 * Using -m option gives 'invalid date'
 
+#### French Revolutionary
+
+#### DONE
+
+* Basic calendar added, needs testing
+
+#### TODO
+
+* Add highlighting for sansculottides
+* Fix width issue somehow (three months of ten day weeks don't fit standard
+terminal sizes)
+
+#### Issues
+
+* -m borked - not sure what is happening to year but it is the Wrong Thing
+
 # Useful Libraries
 
 Hebrew date library: https://github.com/dorner/hebrew_date
@@ -71,3 +89,5 @@ Korean: https://github.com/sunsidew/ruby_lunardate
 Chinese (partial): https://github.com/mycolorway/lunar_blessing
 
 Persian / Indian (JavaScript): https://github.com/shahabyazdi/date-object
+
+Discordian calendar: https://www.rubydoc.info/gems/ddate/1.0.0/DDate
