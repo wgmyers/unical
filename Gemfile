@@ -5,3 +5,4 @@
 source 'https://rubygems.org/'
 
 gem 'hebrew_date'
+gem 'frenchrevcal-ruby'
