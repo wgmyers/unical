@@ -3,9 +3,11 @@
 An attempt at an "improved" version of cal, with support for arbitrary
 calendrical systems and eventually things like dual calendar display.
 
+Currently at a very early stage.
+
 ## What Works And What Doesn't
 
-Currently it's a cut-down version of cal, implementing everything except the
+First, you get a cut-down version of cal, implementing everything except the
 `-A`, `-B` and `-j` options.
 
 I've yet to address any of the ncal stuff, so there's no Easter, no partial list
@@ -49,7 +51,9 @@ Really really? Like really? I'd be delighted, obviously.
 Anyway. Look at `lib/hebrew.rb` and/or `lib/french.rb` to see how it works.
 
 Basically, you drop a file in `lib` that inherits from `Calendar` in `lib/cal.rb`,
-overriding whatever methods you need to make it all work.
+overriding whatever methods you need to make it all work. Naming is significant:
+a file called `foo.rb` will create the option `-U Foo` - this will load `foo.rb`
+and attempt to use it.
 
 Sometimes it might be ok just to override `calc_month`, but with Hebrew, I had
 to override `print_year` as well because sometimes the Hebrew calendar has 13
@@ -57,7 +61,8 @@ months instead of 12. I'd imagine that any other lunisolar calendar will have to
 do the same.
 
 I'm planning to add a standard magic header for things like aliases and a
-description, but that's not in place yet.
+description, so you can list known calendars and not be restricted to just one
+way of referring to a calendar, but that's not in place yet.
 
 I'm also thinking very hard about whether or not I should even try adding
 support for calendars I genuinely know nothing about beyond the Wikipedia page,
