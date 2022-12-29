@@ -6,7 +6,6 @@ require 'RevCal'
 
 # Handle cal-like output for French Revolutionary calendar
 class French < Calendar
-
   # print_year
   # Print a full year
   # We need to override the default to handle Sansculottides
@@ -21,7 +20,6 @@ class French < Calendar
     @options[:month] = 13
     print_month
   end
-
 
   # leap_year
   # NB: Year must be a French Revolutionary year
@@ -39,9 +37,9 @@ class French < Calendar
 
     # Shamelessly cribbed from RevCal library, which does not do the nice
     # strftime stuff that other libraries do.
-    month_names = ["Vendémiaire", "Brumaire", "Frimaire", "Nivôse", "Pluviôse",
-        "Ventôse", "Germinal", "Floréal", "Prairial", "Messidor",
-        "Thermidor", "Fructidor", "Sansculottides"]
+    month_names = %w[Vendémiaire Brumaire Frimaire Nivôse Pluviôse
+                     Ventôse Germinal Floréal Prairial Messidor
+                     Thermidor Fructidor Sansculottides]
 
     # We always need to know when today is (unless highlighting is off)
     today = RevDate.fromGregorian(Date.today)
@@ -103,5 +101,4 @@ class French < Calendar
 
     output
   end
-
 end
