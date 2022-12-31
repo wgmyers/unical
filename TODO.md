@@ -91,3 +91,5 @@ Chinese (partial): https://github.com/mycolorway/lunar_blessing
 Persian / Indian (JavaScript): https://github.com/shahabyazdi/date-object
 
 Discordian calendar: https://www.rubydoc.info/gems/ddate/1.0.0/DDate
+
+Another one: https://github.com/tamouse/ddate-redux
