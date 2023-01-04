@@ -48,12 +48,6 @@ class Hebrew < Calendar
     ref_d = HebrewDate.new_from_hebrew(year, month, 1)
     today = HebrewDate.new(Date.today)
 
-    pp ref_d
-    pp ref_d.year.to_s
-    pp ref_d.month.to_s
-    pp ref_d.day.to_s
-    pp today
-
     # * calculate the proper lengths of Cheshvan and Kislev for the current year
     months[7] = 30 if ref_d.last_day_of_hebrew_month(8) == 30
     months[8] = 29 if ref_d.last_day_of_hebrew_month(9) == 29
